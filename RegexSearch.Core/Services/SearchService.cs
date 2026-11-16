@@ -3,19 +3,15 @@ using RegexSearch.Core.Models;
 
 namespace RegexSearch.Core.Services
 {
-    /// <summary>
-    /// Сервис поиска: два независимых алгоритма
-    /// 1. Через регулярные выражения
-    /// 2. Через собственный конечный автомат
-    /// </summary>
+    
     public class SearchService
     {
-        // Регулярное выражение для СНИЛС: XXX-XXX-XXX XX
+        // СНИЛС: XXX-XXX-XXX XX
         private readonly string _pattern = @"\b\d{3}-\d{3}-\d{3}\s\d{2}\b";
 
-        /// <summary>
-        /// Поиск с помощью регулярных выражений (библиотечный способ)
-        /// </summary>
+       
+        // Поиск с помощью регулярных выражений 
+        
         public List<MatchResult> SearchWithRegex(string text)
         {
             var results = new List<MatchResult>();
@@ -39,9 +35,9 @@ namespace RegexSearch.Core.Services
             return results;
         }
 
-        /// <summary>
-        /// Поиск с помощью собственного конечного автомата
-        /// </summary>
+        
+        // Поиск с помощью собственного конечного автомата
+        
         public List<MatchResult> SearchWithAutomaton(string text)
         {
             var results = new List<MatchResult>();
@@ -64,20 +60,17 @@ namespace RegexSearch.Core.Services
 
                     if (nextState == state && state == SnilsState.S0)
                     {
-                        // Остаёмся в S0 — просто двигаемся дальше
                         break;
                     }
 
                     if (nextState == SnilsState.S0 && state != SnilsState.S0)
                     {
-                        // Ошибка распознавания — прерываем текущую попытку
+                        // Ошибка распознавания 
                         break;
                     }
-
                     state = nextState;
                     j++;
-
-                    // Достигли принимающего состояния
+                    
                     if (state == SnilsState.S14)
                     {
                         // Проверяем границы (чтобы было похоже на \b)
@@ -105,9 +98,9 @@ namespace RegexSearch.Core.Services
             return results;
         }
 
-        /// <summary>
-        /// Функция переходов конечного автомата
-        /// </summary>
+        
+        // Функция переходов конечного автомата
+
         private SnilsState GetNextState(SnilsState current, char c)
         {
             switch (current)
