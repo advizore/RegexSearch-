@@ -1,9 +1,6 @@
 namespace RegexSearch.Core.Models
 {
-    /// <summary>
-    /// Состояния конечного автомата для поиска СНИЛС
-    /// Формат: XXX-XXX-XXX XX
-    /// </summary>
+    
     public enum SnilsState
     {
         S0,   // Начальное состояние
