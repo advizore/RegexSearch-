@@ -12,7 +12,7 @@ namespace RegexSearch.WPF
         {
             InitializeComponent();
 
-            // Пример текста для демонстрации
+           
             InputTextBox.Text =
                 "Примеры СНИЛС в тексте:\n" +
                 "Корректные: 123-456-789 01 и 987-654-321 09\n" +
